@@ -60,10 +60,15 @@ SELECT region,
 For the computation, we'll be needing the following. We can cut some afterwards but it doesn't hurt to keep everything on the result, as it might be helpful in our presentation later. If the database ever struggles to process the information, computation for "original_price" and "zero_profit_sales" can be removed. I decided to keep it in for clarity.
 
 > sales : the final total sale for each transaction; included in the database
+> 
 > discount : percentage of discount that the transaction is made with. This is already factored in on the "sales"; included in the database
+> 
 > profit : gross profit of the transaction, includes both positive and negative; included in the database
+>
 > original_price : item price if discount is zero
+> 
 > zero_profit_sales : absolute lowest item price for the transaction would break even at $0 sales and avoid losses
+> 
 > max_discount : the absolute highest discount for the transaction would break even at $0 sales and avoid losses
 
 ```sql
