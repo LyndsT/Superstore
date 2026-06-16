@@ -67,9 +67,9 @@ For the computation, we'll be needing the following. We can cut some afterwards 
 >
 > original_price : item price if discount is zero
 > 
-> zero_profit_sales : absolute lowest item price for the transaction would break even at $0 sales and avoid losses
+> zero_profit_sales : absolute lowest item price for the transaction to break even at $0 sales and avoid losses
 > 
-> max_discount : the absolute highest discount for the transaction would break even at $0 sales and avoid losses
+> max_discount : the absolute highest discount for the transaction to break even at $0 sales and avoid losses
 
 ```sql
 SELECT region,
