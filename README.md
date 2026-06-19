@@ -10,6 +10,9 @@ I chose the Superstore dataset because it provides a tight, manageable structure
 > [!WARNING]
 Status: 🚧 Work in Progress — Currently building out the data cleaning scripts and initial exploratory analysis.
 
+<details>
+<summary>Click here to expand the table</summary>
+
 |row_id|order_id      |order_date|ship_date |ship_mode     |customer_id|customer_name         |segment    |country      |city             |state               |postal_code|region |product_id     |category       |subcategory|product_name                                                                                                                   |sales    |quantity|discount|profit    |
 |------|--------------|----------|----------|--------------|-----------|----------------------|-----------|-------------|-----------------|--------------------|-----------|-------|---------------|---------------|-----------|-------------------------------------------------------------------------------------------------------------------------------|---------|--------|--------|----------|
 |1     |CA-2016-152156|11/8/2016 |11/11/2016|Second Class  |CG-12520   |Claire Gute           |Consumer   |United States|Henderson        |Kentucky            |42420      |South  |FUR-BO-10001798|Furniture      |Bookcases  |Bush Somerset Collection Bookcase                                                                                              |261.96   |2       |0       |41.9136   |
@@ -19,6 +22,8 @@ Status: 🚧 Work in Progress — Currently building out the data cleaning scrip
 |5     |US-2015-108966|10/11/2015|10/18/2015|Standard Class|SO-20335   |Sean O'Donnell        |Consumer   |United States|Fort Lauderdale  |Florida             |33311      |South  |OFF-ST-10000760|Office Supplies|Storage    |Eldon Fold 'N Roll Cart System                                                                                                 |22.368   |2       |0.2     |2.5164    |
 
 *Table 1. Superstore Sample*
+
+</details>
 
 ---
 
