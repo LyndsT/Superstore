@@ -130,3 +130,12 @@ FROM superstore.sales
 
 Finally, the math is done. Sadly, not everyone shares our love for data in its raw form. Time to give the story some dashboard-worthy makeover
 
+Since the goal is to identify the profit leak, it's best to see the most prevalent one. There are subcategories that balances their profit by earning more than they lose. This dashboard lets us see the subcategories that are the leading profit losers.
+
+<img width="1408" height="791" alt="image" src="https://github.com/user-attachments/assets/10b630a3-8643-4632-9f33-d2053d05c8ef" />
+
+For the first dashboard, it shows the overall generalized overview of the company's gross profit, as well as its products sold. The slicers on the left are used to see the differences between the Regions and the Categories. In turn, it shows the movement of profit per subcategory on the right.
+
+<img width="1407" height="791" alt="image" src="https://github.com/user-attachments/assets/72e704c0-1791-4f1b-9b85-1f3c1b95d336" />
+
+For the second dashboard, it caters for a closer look on the sales. The subcategories are made into slicers as well. For detailed analysis, a scatterplot is put in place to give insight regarding the relationship between the indicated items' current average discount and average discount cap.
