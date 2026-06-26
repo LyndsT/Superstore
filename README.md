@@ -10,13 +10,13 @@ I chose the Superstore dataset because it provides a tight, manageable structure
 > [!WARNING]
 Status: 🚧 Work in Progress — Currently building out the data cleaning scripts and initial exploratory analysis.
 
-|row_id|order_id      |order_date|ship_date |ship_mode     |customer_id|customer_name         |segment    |country      |city             |state               |postal_code|region |product_id     |category       |subcategory|product_name                                                                                                                   |sales    |quantity|discount|profit    |
-|------|--------------|----------|----------|--------------|-----------|----------------------|-----------|-------------|-----------------|--------------------|-----------|-------|---------------|---------------|-----------|-------------------------------------------------------------------------------------------------------------------------------|---------|--------|--------|----------|
-|1     |CA-2016-152156|11/8/2016 |11/11/2016|Second Class  |CG-12520   |Claire Gute           |Consumer   |United States|Henderson        |Kentucky            |42420      |South  |FUR-BO-10001798|Furniture      |Bookcases  |Bush Somerset Collection Bookcase                                                                                              |261.96   |2       |0       |41.9136   |
-|2     |CA-2016-152156|11/8/2016 |11/11/2016|Second Class  |CG-12520   |Claire Gute           |Consumer   |United States|Henderson        |Kentucky            |42420      |South  |FUR-CH-10000454|Furniture      |Chairs     |Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back                                                                    |731.94   |3       |0       |219.582   |
-|3     |CA-2016-138688|6/12/2016 |6/16/2016 |Second Class  |DV-13045   |Darrin Van Huff       |Corporate  |United States|Los Angeles      |California          |90036      |West   |OFF-LA-10000240|Office Supplies|Labels     |Self-Adhesive Address Labels for Typewriters by Universal                                                                      |14.62    |2       |0       |6.8714    |
-|4     |US-2015-108966|10/11/2015|10/18/2015|Standard Class|SO-20335   |Sean O'Donnell        |Consumer   |United States|Fort Lauderdale  |Florida             |33311      |South  |FUR-TA-10000577|Furniture      |Tables     |Bretford CR4500 Series Slim Rectangular Table                                                                                  |957.5775 |5       |0.45    |-383.031  |
-|5     |US-2015-108966|10/11/2015|10/18/2015|Standard Class|SO-20335   |Sean O'Donnell        |Consumer   |United States|Fort Lauderdale  |Florida             |33311      |South  |OFF-ST-10000760|Office Supplies|Storage    |Eldon Fold 'N Roll Cart System                                                                                                 |22.368   |2       |0.2     |2.5164    |
+| Row ID | Order ID | Order Date | Ship Date | Ship Mode | Customer ID | Customer Name | Segment | Country | City | State | Postal Code | Region | Product ID | Category | Sub-Category | Product Name | Sales | Qty | Discount | Profit |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---: |
+| 1 | CA-2016-152156 | 11/08/2016 | 11/11/2016 | Second Class | CG-12520 | Claire Gute | Consumer | United States | Henderson | Kentucky | 42420 | South | FUR-BO-10001798 | Furniture | Bookcases | Bush Somerset Collection Bookcase | 261.96 | 2 | 0.00% | 41.91 |
+| 2 | CA-2016-152156 | 11/08/2016 | 11/11/2016 | Second Class | CG-12520 | Claire Gute | Consumer | United States | Henderson | Kentucky | 42420 | South | FUR-CH-10000454 | Furniture | Chairs | Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back | 731.94 | 3 | 0.00% | 219.58 |
+| 3 | CA-2016-138688 | 06/12/2016 | 06/16/2016 | Second Class | DV-13045 | Darrin Van Huff | Corporate | United States | Los Angeles | California | 90036 | West | OFF-LA-10000240 | Office Supplies | Labels | Self-Adhesive Address Labels for Typewriters by Universal | 14.62 | 2 | 0.00% | 6.87 |
+| 4 | US-2015-108966 | 10/11/2015 | 10/18/2015 | Standard Class | SO-20335 | Sean O'Donnell | Consumer | United States | Fort Lauderdale | Florida | 33311 | South | FUR-TA-10000577 | Furniture | Tables | Bretford CR4500 Series Slim Rectangular Table | 957.58 | 5 | 45.00% | -383.03 |
+| 5 | US-2015-108966 | 10/11/2015 | 10/18/2015 | Standard Class | SO-20335 | Sean O'Donnell | Consumer | United States | Fort Lauderdale | Florida | 33311 | South | OFF-ST-10000760 | Office Supplies | Storage | Eldon Fold 'N Roll Cart System | 22.37 | 2 | 20.00% | 2.52 |
 
 *Table 1. Superstore Sample*
 
@@ -59,17 +59,14 @@ SELECT region,
 
 For the computation, we'll be needing the following. We can cut some afterwards but it doesn't hurt to keep everything on the result, as it might be helpful in our presentation later. If the database ever struggles to process the information, computation for "original_price" and "zero_profit_sales" can be removed. I decided to keep it in for clarity.
 
-> sales : the final total sale for each transaction; included in the database
-> 
-> discount : percentage of discount that the transaction is made with. This is already factored in on the "sales"; included in the database
-> 
-> profit : gross profit of the transaction, includes both positive and negative; included in the database
->
-> original_price : item price if discount is zero
-> 
-> zero_profit_sales : absolute lowest item price for the transaction to break even at $0 sales and avoid losses
-> 
-> max_discount : the absolute highest discount for the transaction to break even at $0 sales and avoid losses
+| Column | Description |
+| :--- | :--- |
+| **sales** | The final total sale for each transaction (included in the database). |
+| **discount** | Percentage of discount that the transaction is made with. This is already factored into "sales" (included in the database). |
+| **profit** | Gross profit of the transaction, including both positive and negative values (included in the database). |
+| **original_price** | Item price if the discount is zero. |
+| **zero_profit_sales** | Absolute lowest item price for the transaction to break even at $0 profit and avoid losses. |
+| **max_discount** | The absolute highest discount for the transaction to break even at $0 profit and avoid losses. |
 
 ```sql
 SELECT region,
@@ -114,16 +111,90 @@ FROM superstore.sales
 
 **OUT:**
 
-|region |category       |sub_category|product_id     |product_name                                                                                                                   |sales   |discount|profit  |original_price        |zero_profit_sales|max_discount           |
-|-------|---------------|------------|---------------|-------------------------------------------------------------------------------------------------------------------------------|--------|--------|--------|----------------------|-----------------|-----------------------|
-|South  |Furniture      |Bookcases   |FUR-BO-10001798|Bush Somerset Collection Bookcase                                                                                              |261.96  |0.00    |41.91   |261.9600000000000000  |220.05           |0.15998625744388456253 |
-|South  |Furniture      |Chairs      |FUR-CH-10000454|Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back                                                                    |731.94  |0.00    |219.58  |731.9400000000000000  |512.36           |0.29999726753559034894 |
-|West   |Office Supplies|Labels      |OFF-LA-10000240|Self-Adhesive Address Labels for Typewriters by Universal                                                                      |14.62   |0.00    |6.87    |14.6200000000000000   |7.75             |0.46990424076607387141 |
-|South  |Furniture      |Tables      |FUR-TA-10000577|Bretford CR4500 Series Slim Rectangular Table                                                                                  |957.58  |0.45    |-383.03 |1741.0545454545454545 |1340.61          |0.23000114872908790908 |
-|South  |Office Supplies|Storage     |OFF-ST-10000760|Eldon Fold 'N Roll Cart System                                                                                                 |22.37   |0.20    |2.52    |27.9625000000000000   |19.85            |0.29012069736253911489 |
+| Region | Category | Sub-Category | Product ID | Product Name | Sales | Discount | Profit | Original Price | Zero-Profit Sales | Max Discount |
+| :--- | :--- | :--- | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: |
+| South | Furniture | Bookcases | FUR-BO-10001798 | Bush Somerset Collection Bookcase | 261.96 | 0.00% | 41.91 | 261.96 | 220.05 | 16.00% |
+| South | Furniture | Chairs | FUR-CH-10000454 | Hon Deluxe Fabric Upholstered Stacking Chairs, Rounded Back | 731.94 | 0.00% | 219.58 | 731.94 | 512.36 | 30.00% |
+| West | Office Supplies | Labels | OFF-LA-10000240 | Self-Adhesive Address Labels for Typewriters by Universal | 14.62 | 0.00% | 6.87 | 14.62 | 7.75 | 46.99% |
+| South | Furniture | Tables | FUR-TA-10000577 | Bretford CR4500 Series Slim Rectangular Table | 957.58 | 45.00% | -383.03 | 1,741.05 | 1,340.61 | 23.00% |
+| South | Office Supplies | Storage | OFF-ST-10000760 | Eldon Fold 'N Roll Cart System | 22.37 | 20.00% | 2.52 | 27.96 | 19.85 | 29.01% |
 
-*Table 2: The Promotion Leak Sample - *
+*Table 2: The Promotion Leak Sample*
 
+Lastly, to make our work easier, we can make use of SQL as well to see which region - subcategory we need to focus on. We'll be gathering the profit, loss, and the percentage increase if the loss were to breakeven to garner the maximum gain the company can gain
+
+**IN:**
+
+```sql
+WITH profit_table AS(
+SELECT region,
+	sub_category,
+	SUM(CASE
+		WHEN profit < 0 THEN 0
+		ELSE profit
+		END) AS profit,
+	SUM(CASE
+		WHEN profit > 0 THEN 0
+		ELSE profit
+		END) AS loss
+FROM superstore.sales
+GROUP BY sub_category, region
+ORDER BY region
+)
+
+SELECT pt.region,
+	pt.sub_category,
+	pt.profit,
+	pt.loss,
+	(ABS(pt.loss) / pt.profit) AS percentage_increase
+FROM profit_table pt
+ORDER BY percentage_increase DESC;
+```
+
+**OUT:**
+
+| Region | Sub-Category | Profit | Loss | % Increase |
+| :--- | :--- | ---: | ---: | ---: |
+| East | Tables | 20.97 | -11,046.36 | 526.77% |
+| Central | Supplies | 198.40 | -860.28 | 4.34% |
+| East | Supplies | 406.67 | -1,561.78 | 3.84% |
+| Central | Bookcases | 949.11 | -2,947.03 | 3.11% |
+| Central | Furnishings | 2,038.46 | -5,944.64 | 2.92% |
+| Central | Tables | 3,008.69 | -6,568.37 | 2.18% |
+| South | Tables | 4,217.71 | -8,840.77 | 2.10% |
+| Central | Machines | 1,418.06 | -2,904.13 | 2.05% |
+| West | Bookcases | 2,577.17 | -4,223.67 | 1.64% |
+| Central | Appliances | 5,991.06 | -8,629.67 | 1.44% |
+
+*Table 3. Points of Interest - Biggest % Increase*
+
+While we're at it, let's also consider the region - subcategory combination with the biggest net loss by altering the last line of the last query
+
+**IN:**
+
+```sql
+...
+ORDER BY pt.loss ASC;
+```
+
+**OUT:**
+
+| Region | Sub-Category | Profit | Loss | % Increase |
+| :--- | :--- | ---: | ---: | ---: |
+| Central | Binders | 20,865.75 | -21,909.46 | 1.05% |
+| East | Machines | 20,918.85 | -13,990.20 | 0.67% |
+| East | Tables | 20.97 | -11,046.36 | 526.77% |
+| South | Tables | 4,217.71 | -8,840.77 | 2.10% |
+| Central | Appliances | 5,991.06 | -8,629.67 | 1.44% |
+| South | Binders | 12,305.16 | -8,404.51 | 0.68% |
+| South | Machines | 6,196.34 | -7,635.24 | 1.23% |
+| East | Phones | 19,030.53 | -6,715.83 | 0.35% |
+| Central | Tables | 3,008.69 | -6,568.37 | 2.18% |
+| East | Binders | 17,239.58 | -5,971.66 | 0.35% |
+
+*Table 4. Points of Interest - Biggest Net Loss*
+
+Those are quite the significant findings no? Very interesting data that we can look into in a deeper manner.
 ---
 
 ## The Promotion Leak - PowerBI
@@ -138,4 +209,42 @@ For the first dashboard, it shows the overall generalized overview of the compan
 
 <img width="1407" height="791" alt="image" src="https://github.com/user-attachments/assets/72e704c0-1791-4f1b-9b85-1f3c1b95d336" />
 
-For the second dashboard, it caters for a closer look on the sales. The subcategories are made into slicers as well. For detailed analysis, a scatterplot is put in place to give insight regarding the relationship between the indicated items' current average discount and average discount cap.
+For the second dashboard, it caters for a closer look on the sales. The subcategories are made into slicers as well. For detailed analysis, a table indicates each item's subcategory, together with its Current Discount (Avg), Discount Cap (Avg), Items Sold (Count), and Profit (Sum).
+
+---
+
+## Insights
+
+The data indicates that the **Tables Subcategory** represents the most significant profit drag, culminating in a net loss of $ -11.05k due to aggressive discounts. This profit loss is anomalously significant as adopting the discount cap for each item would bump the profit for a +526.77% increase in the subcategory. For the bigger picture, it alone would increase the entire profit of East Region by +12.06%. 
+
+<img width="1114" height="392" alt="image" src="https://github.com/user-attachments/assets/683b3fc4-d94b-4a28-b122-f21a62aabd46" />
+
+
+
+---
+
+The second point of interest leads away from subcategories and onto region. 6 out of the 10 leading profit leakage comes from the **Central region** . While seemingly harmless unlike Eastern region's Tables, its losses cumulatively adds up to a $ -27,854.12 net loss, turning it into the region with the lowest profit. More on this on the next finding.
+
+---
+
+Lastly, I admittedly only recognized that what I missed was just the raw value alone. I was so fixated on the discounts and their percentages that it went over my head. And it was also the reason why I made the prompt for Table 4.
+
+<details>
+  <summary> <b> Click here for Table 4 recap </b> </summary>
+
+| Region | Sub-Category | Profit | Loss | % Increase |
+| :--- | :--- | ---: | ---: | ---: |
+| Central | Binders | 20,865.75 | -21,909.46 | 1.05% |
+| East | Machines | 20,918.85 | -13,990.20 | 0.67% |
+| East | Tables | 20.97 | -11,046.36 | 526.77% |
+| South | Tables | 4,217.71 | -8,840.77 | 2.10% |
+| Central | Appliances | 5,991.06 | -8,629.67 | 1.44% |
+| South | Binders | 12,305.16 | -8,404.51 | 0.68% |
+| South | Machines | 6,196.34 | -7,635.24 | 1.23% |
+| East | Phones | 19,030.53 | -6,715.83 | 0.35% |
+| Central | Tables | 3,008.69 | -6,568.37 | 2.18% |
+| East | Binders | 17,239.58 | -5,971.66 | 0.35% |
+
+</details>
+
+Leading the biggest net loss the Central Binders, Followed by East Machines and East Tables (which was already discussed above)
