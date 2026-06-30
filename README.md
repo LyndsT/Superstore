@@ -45,7 +45,7 @@ WHERE profit < 0;
 OUT:
 > -156131.86
 
-With some quick maths, it's visible that the company lost about ***MORE THAN A THIRD*** of its earnings due to aggressive discounts. However, if I'm to present these to shareholders, I can't exactly just show these numbers, tell them to cut the discounts, and call it a day. I might not have a degree in business but in a realistic world, space taken in the warehouse that remains dormant is space that's not earning. Discounts are there to expedite the movement of slow-moving inventory, that's why its presence is as constant as taxes.
+With some quick maths, it's visible that the company lost about ***54.52%*** of its earnings due to aggressive discounts. However, if I'm to present these to shareholders, I can't exactly just show these numbers, tell them to cut the discounts, and call it a day. I might not have a degree in business but in a realistic world, space taken in the warehouse that remains dormant is space that's not earning. Discounts are there to expedite the movement of slow-moving inventory, that's why its presence is as constant as taxes.
 
 Now to address this issue, which categorization do I want to split the entries with? Shareholders deal with **strategic categories** that executives can actually make decisions about. However, down the supply chain, store managers will also be able to make use of discount caps for each item so it's better to include it in as well.
 
@@ -203,31 +203,25 @@ Finally, the math is done. Sadly, not everyone shares our love for data in its r
 
 Since the goal is to identify the profit leak, it's best to see the most prevalent one. There are subcategories that balances their profit by earning more than they lose. This dashboard lets us see the subcategories that are the leading profit losers.
 
-<img width="1408" height="791" alt="image" src="https://github.com/user-attachments/assets/10b630a3-8643-4632-9f33-d2053d05c8ef" />
+<img width="1405" height="788" alt="image" src="https://github.com/user-attachments/assets/24fb4bf7-13e1-4c5d-8eb4-080871bd9486" />
 
-For the first dashboard, it shows the overall generalized overview of the company's gross profit, as well as its products sold. The slicers on the left are used to see the differences between the Regions and the Categories. In turn, it shows the movement of profit per subcategory on the right.
+For the first dashboard, it shows the overall generalized overview of the company's gross profit, as well as its products sold. The slicers on the left are used to select the highlighted data between the regions and the categories, which can be combined to create deeper insights. In turn, the clustered column chart on the upper right shows the difference between the current and the supposedly maximum discount per region-category while the of profit per subcategory is shown on a similar graph on the bottom part.
 
 <img width="1407" height="791" alt="image" src="https://github.com/user-attachments/assets/72e704c0-1791-4f1b-9b85-1f3c1b95d336" />
 
-For the second dashboard, it caters for a closer look on the sales. The subcategories are made into slicers as well. For detailed analysis, a table indicates each item's subcategory, together with its Current Discount (Avg), Discount Cap (Avg), Items Sold (Count), and Profit (Sum).
+For the second dashboard, it caters for a closer look on the sales. In addition to the regions and categories, the subcategories are made into slicers as well. For detailed analysis, a table indicates each item's subcategory and product name, together with its Current Discount (Avg), Discount Cap (Avg), Items Sold (Count), and Profit (Sum).
 
 ---
 
 ## Insights
 
-The data indicates that the **Tables Subcategory** represents the most significant profit drag, culminating in a net loss of $ -11.05k due to aggressive discounts. This profit loss is anomalously significant as adopting the discount cap for each item would bump the profit for a +526.77% increase in the subcategory. For the bigger picture, it alone would increase the entire profit of East Region by +12.06%. 
+The data indicates that the **East Tables Subcategory** represents the most significant profit drag by percentage, culminating in a net loss of - 526% due to aggressive discounts. For the bigger picture, it alone would increase the entire profit of East Region by +12.06%. 
 
 <img width="1114" height="392" alt="image" src="https://github.com/user-attachments/assets/683b3fc4-d94b-4a28-b122-f21a62aabd46" />
 
-
-
 ---
 
-The second point of interest leads away from subcategories and onto region. 6 out of the 10 leading profit leakage comes from the **Central region** . While seemingly harmless unlike Eastern region's Tables, its losses cumulatively adds up to a $ -27,854.12 net loss, turning it into the region with the lowest profit. More on this on the next finding.
-
----
-
-Lastly, I admittedly only recognized that what I missed was just the raw value alone. I was so fixated on the discounts and their percentages that it went over my head. And it was also the reason why I made the prompt for Table 4.
+The second point of interest leads us into another region. 6 out of the 10 leading profit leakage comes from the **Central region** . While seemingly harmless unlike Eastern region's Tables, its losses cumulatively adds up to a $ -27,854.12 net loss, turning it into the region with the lowest profit. Its leading reason for this loss is due to the sales of **Binders**. $ 21,909.46 of the losses can be attributed to the said subcategory, which constitutes to 78.66% of the total loss of the entire region.
 
 <details>
   <summary> <b> Click here for Table 4 recap </b> </summary>
@@ -247,4 +241,24 @@ Lastly, I admittedly only recognized that what I missed was just the raw value a
 
 </details>
 
-Leading the biggest net loss the Central Binders, Followed by East Machines and East Tables (which was already discussed above)
+---
+
+Leading the biggest net loss the Central Binders, followed by East Machines and East Tables (which was already discussed above). Personally, it was a bit surprising that East Machines shoehorned its way into the top 2 so I looked more into the reason. Lo and behold, it was due to a single product.
+
+"Cubify CubeX 3D Printer Double Head Print" is an item that should only be sold at a discounted rate of 26% at the maximum. However, Eastern branches have sold the item at an average of 53% discount; more than twice it's breakeven amount. This decision has costed the company a total amount of $ -8879.97, split amongst the 3 sales made with the item. Seeing there are no explanation as to why these items are sold at these prices, these are decisions that require deeper inquiry to address.
+
+<img width="1171" height="126" alt="image" src="https://github.com/user-attachments/assets/6f3118ec-fe3b-4a30-b1b9-032edf27cdf3" />
+
+---
+
+## Findings and Recommendations
+
+To summarize, here are the leading reasons for the profit loss of the company:
+
+| Reason | Region | Sub-Category | Item | Net Loss | % Profit Increase |
+| :--- | :--- | :--- | :--- | ---: | ---: |
+| Biggest Net Loss (Subcategory) | Central | Binders | - | -21,909.46 | +1.05% (vs. Central Binders) |
+| Biggest Net Loss (Item) | - | Machines | Cubify CubeX 3D Printer Double Head Print | -13,079.96 | +39.04% (vs Machines) |
+| Biggest Profit% Loss | East | Tables | - | -11,046.36 | +526.77% (vs. East Tables) |
+
+As a starter, it would help to address these issues first as these are the top concerns regarding profit loss that the company is facing. One can go one by one through the regions and subcategories indicated on Tables 3 and 4 but addressing these three alone would increase the overall profit of the company by +16.07%
