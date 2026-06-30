@@ -195,6 +195,7 @@ ORDER BY pt.loss ASC;
 *Table 4. Points of Interest - Biggest Net Loss*
 
 Those are quite the significant findings no? Very interesting data that we can look into in a deeper manner.
+
 ---
 
 ## The Promotion Leak - PowerBI
