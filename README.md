@@ -208,7 +208,7 @@ Since the goal is to identify the profit leak, it's best to see the most prevale
 
 For the first dashboard, it shows the overall generalized overview of the company's gross profit, as well as its products sold. The slicers on the left are used to select the highlighted data between the regions and the categories, which can be combined to create deeper insights. In turn, the clustered column chart on the upper right shows the difference between the current and the supposedly maximum discount per region-category while the of profit per subcategory is shown on a similar graph on the bottom part.
 
-<img width="1407" height="791" alt="image" src="https://github.com/user-attachments/assets/72e704c0-1791-4f1b-9b85-1f3c1b95d336" />
+<img width="1405" height="789" alt="image" src="https://github.com/user-attachments/assets/7a585912-d210-46bc-88e4-d457ee28c9fc" />
 
 For the second dashboard, it caters for a closer look on the sales. In addition to the regions and categories, the subcategories are made into slicers as well. For detailed analysis, a table indicates each item's subcategory and product name, together with its Current Discount (Avg), Discount Cap (Avg), Items Sold (Count), and Profit (Sum).
 
