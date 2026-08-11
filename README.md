@@ -1,3 +1,13 @@
+### E-Commerce Profit Leak & Discount Strategy Analysis
+
+* **Objective:** Conduct an end-to-end exploratory analysis on a 10,000-record e-commerce dataset to identify the root causes of margin erosion, calculate break-even discount thresholds, and build executive dashboards for promotional governance.
+* **Key Tech Stack:** PostgreSQL, SQL (CTEs, Conditional Logic, Window Functions), Power BI, DAX, Data Storytelling.
+* **Key Achievements:**
+  * **Quantified Profit Leakage:** Identified that aggressive discounting caused **$156K in gross losses**—eroding over 54.5% of the company's potential net earnings.
+  * **Engineered Break-Even Logic:** Wrote robust SQL scripts featuring mathematical modeling and division-by-zero safeguards (`CASE` statements) to calculate exact item-level price floors (`zero_profit_sales`) and maximum allowable discount caps (`max_discount`).
+  * **Delivered Interactive Dashboards:** Designed a multi-page Power BI dashboard with regional slicers and drill-down product tables to visualize discount variance and isolate toxic SKUs.
+  * **Formulated Strategic Recommendations:** Uncovered major regional profit drains—such as the **East Tables subcategory (-526% net loss)** and **Central Binders ($21.9K net loss)**—and defined discount cap policies to recover up to **+16.07% in overall net profitability**.
+
 # Superstore Sales Analysis
 Welcome to my first data analytics project! This repository contains my end-to-end analysis of a 9,994-row e-commerce dataset, focusing on moving past basic reporting and digging into data storytelling.
 
